@@ -23,8 +23,6 @@ def test_generate_csv(filename, num_rows, args):
 
     content.append(header)
 
-    print(num_rows)
-
     for i in range(int(num_rows)):
         row = []
         for f in functions:
