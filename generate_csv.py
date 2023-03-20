@@ -19,7 +19,7 @@ def test_generate_csv():
         'dob'
     ]]
 
-    for i in range(1000):
+    for i in range(10000):
         content.append([
             fake.name(),
             fake.address(),
