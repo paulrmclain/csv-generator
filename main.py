@@ -13,10 +13,4 @@ def hello_world():
 def test_generate_handler(filename, num_rows):
     args = request.args.items()
     test_generate_csv(filename, num_rows, args)
-    
-    # print(request.args)
-
-    # for key, value in request.args.items():
-    #     print('%s : %s' % (key, value))
-
     return json.dumps(request.args)
