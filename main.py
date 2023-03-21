@@ -1,13 +1,13 @@
 from generate_csv import *
 
-from flask import Flask
-from flask import request
+import json
+
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return 'Hello, csv!'
-
+@app.route("/")
+def index_page():
+    return render_template('index.html')
 
 @app.route('/test/generate/csv/<filename>/<rows>')
 def test_generate_handler(filename, rows):
@@ -20,13 +20,15 @@ def test_get_faker_types():
     types = get_available_faker_types()
     return json.dumps(types)
 
-@app.route('/generate/csv/<filename>/<rows>', methods=['POST'])
+@app.route('/api/generate/csv/<filename>/<rows>', methods=['POST'])
 def generate_csv_handler(filename, rows):
-    data_types = request.json
-    content = test_generate_csv(filename, rows, request.json)
-    return 'ok'
+    # print(request.get_data())
+    data_types = request.get_json()
+    print(data_types)
+    content = init_generate_csv(filename, rows, request.json)
+    return 'got it'
   
-@app.route('/data/types')
+@app.route('/api/data/types')
 def get_data_types():
     types = get_available_faker_types()
     return json.dumps(types)

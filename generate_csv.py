@@ -12,7 +12,7 @@ def generate_csv(filename, delimiter, quotechar, quoting, dialect, content):
         csv_writer.writerows(content)
 
 
-def test_generate_csv(filename, rows, data_types):
+def init_generate_csv(filename, rows, data_types):
     Faker.seed(random.randrange(0, 100))
 
     content = []
