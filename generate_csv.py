@@ -1,6 +1,8 @@
 import csv
 import random
 import json
+from utils import *
+
 from faker import Faker
 fake = Faker()
 
@@ -45,3 +47,17 @@ def test_generate_csv(filename, num_rows, args):
         content.append(row)
 
     generate_csv(filename, ',', '"', csv.QUOTE_MINIMAL, 'unix', content)
+
+
+def get_available_faker_types():
+    types_and_labels = []
+    types = get_members(fake)
+
+    for t in types:
+        label = convert_to_sentence(convert_to_camel(t))
+        types_and_labels.append({
+            'label': label,
+            'method': t
+        })
+
+    return types_and_labels
