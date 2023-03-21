@@ -12,42 +12,43 @@ def generate_csv(filename, delimiter, quotechar, quoting, dialect, content):
         csv_writer.writerows(content)
 
 
-def test_generate_csv(filename, num_rows, args):
+def test_generate_csv(filename, rows, data_types):
     Faker.seed(random.randrange(0, 100))
 
     content = []
     header = []
     functions = []
 
-    for key, value in args:
-        header.append(key)
-        functions.append(value)
 
-    content.append(header)
-
-    for i in range(int(num_rows)):
+    for i in range(int(rows)):
         row = []
-        for f in functions:
-            match f:
-                case 'name':
-                    row.append(fake.name())
-                case 'address':
-                    row.append(fake.address())
-                case 'phone_number':
-                    row.append(fake.phone_number())
-                case 'job':
-                    row.append(fake.job())
-                case 'date_of_birth': 
-                    row.append(fake.date_of_birth())
-                case 'email':
-                    row.append(fake.email())
-                case _:
-                    None
+        for data_type in data_types:
+            generated_value = None
+            method = getattr(fake, data_type['method'])
+
+            # print('-------------')
+
+            try:
+                generated_value = method()
+                # print('CALLED %s' % data_type['method'])
+                # print('GOT %s' % generated_value)
+            except Exception as e:
+                print('TRIED TO CALL %s' % data_type['method'])
+                generated_value = None
+                print('generated_value is now %s' % generated_value)
+
+            if generated_value is not None:
+                row.append(generated_value)
+                if data_type['label'] not in header:
+                    header.append(data_type['label'])
 
         content.append(row)
 
+    content.insert(0, header)
+
     generate_csv(filename, ',', '"', csv.QUOTE_MINIMAL, 'unix', content)
 
+    return 'ok'
 
 def get_available_faker_types():
     types_and_labels = []
