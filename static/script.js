@@ -303,8 +303,15 @@ $(function() {
 
         console.log(JSON.stringify(headers));
 
+        var csv_file_name = $('#csv_file_name').val();
+        if ( csv_file_name == '' ) csv_file_name = 'csv_file.csv';
+
+
+        var rows = $('#rows').val();
+        if ( rows == '' ) rows = 1;
+
         jQuery.ajax ({
-            url: '/api/generate/csv/winnie.csv/25',
+            url: '/api/generate/csv/' + csv_file_name + '/' + rows,
             type: 'POST',
             data: JSON.stringify(headers),
             dataType: 'json',

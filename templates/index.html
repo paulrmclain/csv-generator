@@ -7,108 +7,36 @@
         <title>Winnie, the CSV Generator</title>
 
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <link href="{{url_for('static', filename='bootstrap.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="{{url_for('static', filename='script.js')}}"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <a class="navbar-brand" id="header" href="/">Winnie, the CSV Generator</a>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                          
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="d-flex">
-                    <button class="btn btn-primary" id="about_modal_btn"><i class="bi bi-question-circle"></i></button>
-                </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" id="header" href="/">Winnie, the CSV Generator</a>
+                </div>                     
             </div>
         </nav>
-        <div class="modal fade" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel2">About</h5>
-              </div>
-              <div class="modal-body">
-                <p class="text-justify">
-                    This game is inspired by <a href='https://www.nytimes.com/games/wordle/index.html'>Wordle</a>. You will have five tries to guess the five letter word.<br><br>
-
-                    This application was written in <a href='https://www.python.org/'>Python</a>, using <a href='https://flask.palletsprojects.com/en/2.0.x/'>Flask</a> as the framework and a mixture of HTML and <a href='https://jquery.com/'>JQuery</a> for the frontend. It runs in <a href='https://cloud.google.com/appengine'>Google App Engine</a>, a serverless platform within Google Cloud Platform.<br><br>
-
-                    Refresh to get a new random word, or visit a specific puzzle by appending the number to the URL. There are approximately 5,700 words available.<br><br>
-
-                    <b>Last updated on January 6, 2023.</b><br><br>
-                </p>
-                <hr>
-                <input class="form-check-input" type="checkbox" id="unlimited_guesses" name="option1" value="something">
-                <label class="form-check-label" for="unlimited_guesses">
-                    Allow unlimited guesses
-                </label>
-                <br>
-                <input class="form-check-input" type="checkbox" id="wrong_letters" name="option1" value="something">
-                <label class="form-check-label" for="wrong_letters">
-                    Incorrect letters may be reguessed
-                </label>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_button_about">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal fade" id="results-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Results</h5>
-              </div>
-              <div class="modal-body">
-                <div id="reveal_word"></div>
-                <div id="time_elapsed"></div>
-                <div id="guess_count"></div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="prev_word"><i class="bi bi-arrow-left-circle"></i></button>
-                <button type="button" class="btn btn-primary" id="new_word">Random Word</button>
-                <button type="button" class="btn btn-primary" id="next_word"><i class="bi bi-arrow-right-circle"></i></button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_button">Close</button>
-                <button type="button" class="btn btn-info" id="share">Copy to Clipboard</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container-sm">
+        
+        <div class="container">
             <div class="row">
-                
-                <div class="col" id="headers">
-                    
-                    
-
+                <div class="col-sm" id="headers">
                     <div class="input-group mb-3">
                         <input type="text" id="name_0" class="form-control" placeholder="Header Name">
                         <select class="form-control" id="type_0"></select>     
                     </div>
-
-                    
                 </div>
-
-                <div>
-                        <div class="input-group mb-3">
+                <div class="col-sm">
+                    <div class="input-group mb-3">
                         <button class="btn btn-secondary" type="button" id="add">+</button>
-                        &nbsp;
-                        <input type="text" id="csv_name" class="form-control" placeholder="CSV File Name">
-                        <input type="text" id="num_rows" class="form-control" placeholder="Number of rows">
+                        <input type="text" id="csv_file_name" class="form-control" placeholder="CSV File Name">
+                        <input type="text" id="rows" class="form-control" placeholder="Number of rows">
                         <button class="btn btn-primary float-end" type="button" id="generate">Create CSV</button>
                     </div>
-                    </div>
-               
+                </div>
             </div>
         </div>
     </body>
