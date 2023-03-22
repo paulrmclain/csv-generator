@@ -4,6 +4,14 @@ def get_members(class_name):
     all_method_list = dir(class_name)
     desired_method_list = []
     for method in all_method_list:
+        add_to_list = True
+        
+        try:
+            exec_method = getattr(class_name, method)
+            exec_method()
+        except Exception as e:
+            add_to_list = False
+
         if not method.startswith('_') \
            and method != 'add_provider' \
            and method != 'zip' \
@@ -13,7 +21,8 @@ def get_members(class_name):
            and 'bothify' not in method \
            and 'csv' not in method  \
            and 'binary' not in method \
-           and 'bytes' not in method:
+           and 'bytes' not in method \
+           and add_to_list is True:
             desired_method_list.append(method)
 
     return desired_method_list

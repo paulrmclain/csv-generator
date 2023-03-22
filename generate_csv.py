@@ -1,6 +1,5 @@
 import csv
 import random
-import json
 from utils import *
 
 from faker import Faker
@@ -19,7 +18,6 @@ def init_generate_csv(filename, rows, data_types):
     header = []
     functions = []
 
-
     for i in range(int(rows)):
         row = []
         for data_type in data_types:
@@ -36,6 +34,7 @@ def init_generate_csv(filename, rows, data_types):
                 print('TRIED TO CALL %s' % data_type['method'])
                 generated_value = None
                 print('generated_value is now %s' % generated_value)
+                print(e)
 
             if generated_value is not None:
                 row.append(generated_value)
@@ -48,7 +47,7 @@ def init_generate_csv(filename, rows, data_types):
 
     generate_csv(filename, ',', '"', csv.QUOTE_MINIMAL, 'unix', content)
 
-    return 'ok'
+    return content
 
 def get_available_faker_types():
     types_and_labels = []

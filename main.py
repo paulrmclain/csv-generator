@@ -1,6 +1,7 @@
 from generate_csv import *
 
 import json
+import jsonpickle
 
 from flask import Flask, render_template, request
 app = Flask(__name__)
@@ -22,11 +23,11 @@ def test_get_faker_types():
 
 @app.route('/api/generate/csv/<filename>/<rows>', methods=['POST'])
 def generate_csv_handler(filename, rows):
-    # print(request.get_data())
     data_types = request.get_json()
     print(data_types)
-    content = init_generate_csv(filename, rows, request.json)
-    return 'got it'
+    content = init_generate_csv(filename, rows, data_types)
+    response_json = jsonpickle.encode(content)
+    return response_json
   
 @app.route('/api/data/types')
 def get_data_types():
