@@ -34,10 +34,6 @@ $(function() {
         set_select_values($('#type_' + header_count));
     };
 
-    var delete_header = function(select_element) {
-
-    };
-
     var build_header_data = function() {
         var headers = [];
         var header_elems = $('#headers').children();

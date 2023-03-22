@@ -9,11 +9,6 @@ def generate_csv(filename, delimiter, quotechar, quoting, dialect, content):
     with open(filename, 'w', newline='\n') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=delimiter, quotechar=quotechar, quoting=quoting, dialect=dialect)
         csv_writer.writerows(content)
-    
-    with open(filename, 'r') as completed_file:
-        None
-
-    return completed_file
 
 
 def init_generate_csv(filename, rows, data_types):
@@ -29,12 +24,8 @@ def init_generate_csv(filename, rows, data_types):
             generated_value = None
             method = getattr(fake, data_type['method'])
 
-            # print('-------------')
-
             try:
                 generated_value = method()
-                # print('CALLED %s' % data_type['method'])
-                # print('GOT %s' % generated_value)
             except Exception as e:
                 print('TRIED TO CALL %s' % data_type['method'])
                 generated_value = None
@@ -50,7 +41,7 @@ def init_generate_csv(filename, rows, data_types):
 
     content.insert(0, header)
 
-    generated_csv = generate_csv(filename, ',', '"', csv.QUOTE_MINIMAL, 'unix', content)
+    generate_csv(filename, ',', '"', csv.QUOTE_MINIMAL, 'unix', content)
 
     return content
 
