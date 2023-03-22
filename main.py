@@ -2,8 +2,9 @@ from generate_csv import *
 
 import json
 import jsonpickle
+# from io import BytesIO
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 app = Flask(__name__)
 
 @app.route("/")
@@ -34,3 +35,6 @@ def get_data_types():
     types = get_available_faker_types()
     return json.dumps(types)
 
+@app.route('/api/data/download/<filename>')
+def download_csv(filename):
+    return send_file(filename, as_attachment=False, mimetype='text/csv', attachment_filename=filename)

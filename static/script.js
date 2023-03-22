@@ -41,7 +41,11 @@ $(function() {
     var build_header_data = function() {
         var headers = [];
         var header_elems = $('#headers').children();
+
+        console.log()
         
+        $('#status_msg').attr('class', 'alert alert-warning');
+        $('#status_msg').text('Generating CSV...');
         
         for ( var i = 0; i < header_elems.length; i++ ) {
             var header_children = $(header_elems[i]).children();
@@ -94,7 +98,8 @@ $(function() {
 
             $('#json_resp').text(formatted_str);
 
-
+            $('#status_msg').attr('class', 'alert alert-success');
+            $('#status_msg').html('Success! Your file is ready to be downloaded <a href="/api/data/download/' + csv_file_name + '">here</a>. Files will expire after 8 hours.');
         });
     };
 
