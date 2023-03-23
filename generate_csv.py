@@ -1,16 +1,31 @@
+import io
 import csv
 import random
 from utils import *
 
+from google.cloud import storage
+
 from faker import Faker
 fake = Faker()
 
+# gs://csv-generator-381519.appspot.com/
+# https://storage.googleapis.com/csv-generator-381519.appspot.com/
+def write_to_gcs(filename, csv_content):
+    
+    storage_client = storage.Client()
+    bucket = storage_client.bucket('csv-generator-381519.appspot.com')
+    blob = bucket.blob(filename)
+    blob.upload_from_string(data=csv_content, content_type='text/csv')
+
 def generate_csv(filename, delimiter, quotechar, quoting, dialect, content):
-    with open(filename, 'w', newline='\n') as csv_file:
-        csv_writer = csv.writer(csv_file, delimiter=delimiter, quotechar=quotechar, quoting=quoting, dialect=dialect)
-        csv_writer.writerows(content)
+    output = io.StringIO()
 
+    csv_writer = csv.writer(output, delimiter=delimiter, quotechar=quotechar, quoting=quoting, dialect=dialect)
+    csv_writer.writerows(content)
+    csv_content = output.getvalue()
 
+    write_to_gcs(filename, csv_content)
+    
 def init_generate_csv(filename, rows, data_types):
     Faker.seed(random.randrange(0, 100))
 

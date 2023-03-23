@@ -95,7 +95,7 @@ $(function() {
             $('#json_resp').text(formatted_str);
 
             $('#status_msg').attr('class', 'alert alert-success');
-            $('#status_msg').html('Success! Your file is ready to be downloaded <a href="/api/data/download/' + csv_file_name + '">here</a>. Files will expire after 8 hours.');
+            $('#status_msg').html('Success! Your file is ready to be downloaded <a href="https://storage.googleapis.com/csv-generator-381519.appspot.com/' + csv_file_name + '">here</a>. Files will expire after 24 hours.');
         });
     };
 
