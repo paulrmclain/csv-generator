@@ -67,6 +67,10 @@ $(function() {
             }   
         }
 
+        return headers;
+    };
+
+    var generate_csv = function(headers) {
         console.log(JSON.stringify(headers));
 
         var csv_file_name = $('#csv_file_name').val();
@@ -105,6 +109,7 @@ $(function() {
 
     $('#generate').click(function() {
         var header_data = build_header_data();
+        generate_csv(headers);
     });
 
     $('body').on('click', "[id^=delete]", function() {
