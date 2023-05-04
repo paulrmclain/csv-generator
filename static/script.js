@@ -37,8 +37,6 @@ $(function() {
     var build_header_data = function() {
         var headers = [];
         var header_elems = $('#headers').children();
-
-        console.log()
         
         $('#status_msg').attr('class', 'alert alert-warning');
         $('#status_msg').text('Generating CSV...');
@@ -67,14 +65,18 @@ $(function() {
             }   
         }
 
+        console.log(headers);
+
         return headers;
     };
 
     var generate_csv = function(headers) {
         console.log(JSON.stringify(headers));
 
-        var csv_file_name = $('#csv_file_name').val();
-        if ( csv_file_name == '' ) csv_file_name = 'csv_file.csv';
+        var csv_file_name = uuid.v4() + '.csv';
+        console.log(csv_file_name);
+
+        $('#csv_file_name').val(csv_file_name);
 
 
         var rows = $('#rows').val();
@@ -109,7 +111,7 @@ $(function() {
 
     $('#generate').click(function() {
         var header_data = build_header_data();
-        generate_csv(headers);
+        generate_csv(header_data);
     });
 
     $('body').on('click', "[id^=delete]", function() {

@@ -19,7 +19,6 @@ def write_to_gcs(filename, csv_content):
 
 def generate_csv(filename, delimiter, quotechar, quoting, dialect, content):
     output = io.StringIO()
-
     csv_writer = csv.writer(output, delimiter=delimiter, quotechar=quotechar, quoting=quoting, dialect=dialect)
     csv_writer.writerows(content)
     csv_content = output.getvalue()

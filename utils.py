@@ -1,4 +1,5 @@
 import re
+import inspect
 
 def get_members(class_name):
     all_method_list = dir(class_name)
@@ -12,18 +13,21 @@ def get_members(class_name):
         except Exception as e:
             add_to_list = False
 
-        if not method.startswith('_') \
-           and method != 'add_provider' \
-           and method != 'zip' \
-           and method != 'dsv' \
-           and 'seed' not in method \
-           and 'hexify' not in method \
-           and 'bothify' not in method \
-           and 'csv' not in method  \
-           and 'binary' not in method \
-           and 'bytes' not in method \
-           and add_to_list is True:
+        if not method.startswith('_') and check_method(method) is not False:
             desired_method_list.append(method)
+
+        # if not method.startswith('_') \
+        #    and method != 'add_provider' \
+        #    and method != 'zip' \
+        #    and method != 'dsv' \
+        #    and 'seed' not in method \
+        #    and 'hexify' not in method \
+        #    and 'bothify' not in method \
+        #    and 'csv' not in method  \
+        #    and 'binary' not in method \
+        #    and 'bytes' not in method \
+        #    and add_to_list is True:
+        #     desired_method_list.append(method)
 
     return desired_method_list
 
@@ -36,3 +40,74 @@ def convert_to_sentence(camel):
     if camel != '':
         result = re.sub('([A-Z])', r' \1', camel)
         return result[:1].upper() + result[1:].lower()
+
+
+def check_method(method):
+    keep_method = True
+
+    undesired_list = [
+        'add_provider',
+        'zip',
+        'dsv',
+        'seed',
+        'hexify',
+        'bothify',
+        'csv',
+        'binary',
+        'bytes',
+        'lexify',
+        'numerify',
+        'random_choices',
+        'random_element',
+        'random_elements',
+        'random_int',
+        'random_letters',
+        'random_numbers',
+        'random_sample',
+        'randomize_nb_elements',
+        'date_between',
+        'date_between_dates',
+        'date_time_between',
+        'date_time_between_dates',
+        'iso8601',
+        'pytimezone',
+        'time_delta',
+        'time_object',
+        'time_series',
+        'emoji',
+        'image_url',
+        'fixed_width',
+        'image',
+        'json',
+        'json_bytes',
+        'psv',
+        'tar',
+        'tsv',
+        'profile',
+        'simple_profile',
+        'enum',
+        'pybool',
+        'pydecimal',
+        'pydict',
+        'pyfloat',
+        'pyint',
+        'pyiterable',
+        'pylist',
+        'pyobject',
+        'pyset',
+        'pystr',
+        'pystr_format',
+        'pystruct',
+        'pytuple',
+        'parse']
+
+    for ul in undesired_list:
+        if ul == method:
+            keep_method = False
+            break
+
+    return keep_method
+
+
+
+                    
