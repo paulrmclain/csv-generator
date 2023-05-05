@@ -16,19 +16,6 @@ def get_members(class_name):
         if not method.startswith('_') and check_method(method) is not False:
             desired_method_list.append(method)
 
-        # if not method.startswith('_') \
-        #    and method != 'add_provider' \
-        #    and method != 'zip' \
-        #    and method != 'dsv' \
-        #    and 'seed' not in method \
-        #    and 'hexify' not in method \
-        #    and 'bothify' not in method \
-        #    and 'csv' not in method  \
-        #    and 'binary' not in method \
-        #    and 'bytes' not in method \
-        #    and add_to_list is True:
-        #     desired_method_list.append(method)
-
     return desired_method_list
 
 

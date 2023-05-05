@@ -73,7 +73,7 @@ $(function() {
     var generate_csv = function(headers) {
         console.log(JSON.stringify(headers));
 
-        var csv_file_name = uuid.v4() + '.csv';
+        var csv_file_name = uuid.v4();
         console.log(csv_file_name);
 
         $('#csv_file_name').val(csv_file_name);
@@ -101,7 +101,7 @@ $(function() {
             $('#json_resp').text(formatted_str);
 
             $('#status_msg').attr('class', 'alert alert-success');
-            $('#status_msg').html('Success! Your file is ready to be downloaded <a href="https://storage.googleapis.com/csv-generator-381519.appspot.com/' + csv_file_name + '">here</a>. Files will expire after 24 hours.');
+            $('#status_msg').html('Success! Your file is ready to be downloaded <a href="/download/' + csv_file_name + '">here</a>. Files will expire after 24 hours.');
         });
     };
 
