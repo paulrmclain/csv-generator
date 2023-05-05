@@ -34,12 +34,8 @@ def generate_csv_handler(filename, rows):
 def get_data_types():
     types = get_available_faker_types()
     return json.dumps(types)
-
-# @app.route('/api/data/download/<filename>')
-# def download_csv(filename):
-#    return send_file(filename, as_attachment=False, mimetype='text/csv', attachment_filename=filename)
-
+    
 @app.route('/download/<uuid>')
 def download_csv(uuid):
-    url = 'https://storage.googleapis.com/csv-generator-381519.appspot.com/' + uuid + '.csv'
+    url = 'https://storage.googleapis.com/csv-generator-381519.appspot.com/' + uuid
     return redirect(url)
