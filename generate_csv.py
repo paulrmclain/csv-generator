@@ -8,8 +8,6 @@ from google.cloud import storage
 from faker import Faker
 fake = Faker()
 
-# gs://csv-generator-381519.appspot.com/
-# https://storage.googleapis.com/csv-generator-381519.appspot.com/
 def write_to_gcs(filename, csv_content):
     
     storage_client = storage.Client()
