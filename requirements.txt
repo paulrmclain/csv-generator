@@ -3,3 +3,4 @@ Faker
 jsonpickle
 google-cloud-storage
 urllib3<2
+python-dotenv

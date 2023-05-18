@@ -8,22 +8,23 @@ from google.cloud import storage
 from faker import Faker
 fake = Faker()
 
-def write_to_gcs(filename, csv_content):
+def write_to_gcs(location, filename, csv_content):
     
+    print('location is %s' % location)
     storage_client = storage.Client()
-    bucket = storage_client.bucket('csv-generator-381519.appspot.com')
+    bucket = storage_client.bucket(location)
     blob = bucket.blob(filename)
     blob.upload_from_string(data=csv_content, content_type='text/csv')
 
-def generate_csv(filename, delimiter, quotechar, quoting, dialect, content):
+def generate_csv(location, filename, delimiter, quotechar, quoting, dialect, content):
     output = io.StringIO()
     csv_writer = csv.writer(output, delimiter=delimiter, quotechar=quotechar, quoting=quoting, dialect=dialect)
     csv_writer.writerows(content)
     csv_content = output.getvalue()
 
-    write_to_gcs(filename, csv_content)
+    write_to_gcs(location, filename, csv_content)
     
-def init_generate_csv(filename, rows, data_types):
+def init_generate_csv(location, filename, rows, data_types):
     Faker.seed(random.randrange(0, 100))
 
     content = []
@@ -53,7 +54,7 @@ def init_generate_csv(filename, rows, data_types):
 
     content.insert(0, header)
 
-    generate_csv(filename, ',', '"', csv.QUOTE_MINIMAL, 'unix', content)
+    generate_csv(location, filename, ',', '"', csv.QUOTE_MINIMAL, 'unix', content)
 
     return content
 
