@@ -78,12 +78,15 @@ $(function() {
 
         $('#csv_file_name').val(csv_file_name);
 
+        var delimiter = $('#delimiter').val();
+        console.log(delimiter);
+
 
         var rows = $('#rows').val();
         if ( rows == '' ) rows = 1;
 
         jQuery.ajax ({
-            url: '/api/generate/csv/' + csv_file_name + '/' + rows,
+            url: '/api/generate/csv/' + csv_file_name + '/' + rows + '/' + delimiter,
             type: 'POST',
             data: JSON.stringify(headers),
             dataType: 'json',
@@ -99,9 +102,7 @@ $(function() {
             }
 
             $('#json_resp').text(formatted_str);
-
             $('#status_msg').attr('class', 'alert alert-success');
-            
             $('#status_msg').html('Success! Your file is ready to be downloaded <a href="/download/' + csv_file_name + '">here</a>. Files will expire after 24 hours.');
         });
     };

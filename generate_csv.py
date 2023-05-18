@@ -21,7 +21,7 @@ def generate_csv(location, filename, delimiter, quotechar, quoting, dialect, con
     csv_content = output.getvalue()
     write_to_gcs(location, filename, csv_content)
     
-def init_generate_csv(location, filename, rows, data_types):
+def init_generate_csv(location, filename, rows, data_types, delimiter):
     Faker.seed(random.randrange(0, 100))
 
     content = []
@@ -49,9 +49,20 @@ def init_generate_csv(location, filename, rows, data_types):
         content.append(row)
 
     content.insert(0, header)
-    generate_csv(location, filename, ',', '"', csv.QUOTE_MINIMAL, 'unix', content)
+    generate_csv(location, filename, delimiter_map(delimiter), '"', csv.QUOTE_MINIMAL, 'unix', content)
 
     return content
+
+def delimiter_map(delimiter):
+    match delimiter:
+        case 'comma':
+            return ','
+        case 'semicolon':
+            return ';'
+        case 'pipe':
+            return '|'
+        case _:
+            return ','
 
 def get_available_faker_types():
     types_and_labels = []

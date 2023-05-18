@@ -37,21 +37,22 @@
 
             <div class="row">
                 <div class="col-sm">
-                    <label for="csv_file_name">Configuration</label>
+                    <!-- <label for="rows">Number of Rows</label>
+                    <label for="delimiter">Delimiter</label> -->
                     <div class="input-group mb-3">
-                        <input type="text" id="csv_file_name" class="form-control" placeholder="File Name Will Appear Here" disabled>
-                        <input type="text" id="rows" class="form-control" placeholder="# of rows">
-                        <button class="btn btn-primary float-end" type="button" id="generate">Generate CSV</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm">
-                    <label for="json_resp">Output</label>
-                    <div class="input-group mb-3">
-                        <textarea class="form-control" id="json_resp"></textarea>
-                    </div>
+                        <div class="col-md">
+                            <label for="rows" class="control-label">Number of Rows</label>
+                            <input type="number" min="1" max="999999" step="1" id="rows" class="form-control" placeholder="1">
+                        </div>
+                        <div class="col-md">
+                            <label for="delimiter" class="control-label">Delimiter</label>
+                            <select class="form-select" id="delimiter">
+                                <option value="comma">Comma (,)</option>
+                                <option value="semicolon">Semicolon (;)</option>
+                                <option value="pipe">Pipe (|)</option>
+                            </select> 
+                        </div>
+                    </div>  
                 </div>
             </div>
 
@@ -60,6 +61,12 @@
                     <div class="alert alert-primary" role="alert" id="status_msg">
                         Please input some parameters and press 'Generate CSV'.
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm">
+                    <button class="btn btn-primary float-end" type="button" id="generate">Generate CSV</button>
                 </div>
             </div>
         </div>

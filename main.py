@@ -31,11 +31,11 @@ def test_get_faker_types():
     types = get_available_faker_types()
     return json.dumps(types)
 
-@app.route('/api/generate/csv/<filename>/<rows>', methods=['POST'])
-def generate_csv_handler(filename, rows):
-    logging.info('In generate_csv_handler with filename %s' % filename)
+@app.route('/api/generate/csv/<filename>/<rows>/<delimiter>', methods=['POST'])
+def generate_csv_handler(filename, rows, delimiter):
+    logging.info('In generate_csv_handler with filename %s and delimiter %s' % (filename, delimiter))
     data_types = request.get_json()
-    content = init_generate_csv(config['PROJECT_URL'], filename, rows, data_types)
+    content = init_generate_csv(config['PROJECT_URL'], filename, rows, data_types, delimiter)
     response_json = jsonpickle.encode(content)
     return response_json
   
