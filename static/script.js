@@ -65,23 +65,15 @@ $(function() {
             }   
         }
 
-        console.log(headers);
-
         return headers;
     };
 
     var generate_csv = function(headers) {
-        console.log(JSON.stringify(headers));
-
         var csv_file_name = uuid.v4();
-        console.log(csv_file_name);
-
         $('#csv_file_name').val(csv_file_name);
 
         var delimiter = $('#delimiter').val();
-        console.log(delimiter);
-
-
+        
         var rows = $('#rows').val();
         if ( rows == '' ) rows = 1;
 
@@ -118,9 +110,7 @@ $(function() {
 
     $('body').on('click', "[id^=delete]", function() {
         var num = this.id.slice(7);
-        console.log('clicked delete_' + num);
         var parent = $(this).parent();
-        console.log(parent);
         $(parent).remove();
     });
 
