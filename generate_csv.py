@@ -9,8 +9,6 @@ from faker import Faker
 fake = Faker()
 
 def write_to_gcs(location, filename, csv_content):
-    
-    print('location is %s' % location)
     storage_client = storage.Client()
     bucket = storage_client.bucket(location)
     blob = bucket.blob(filename)
@@ -21,7 +19,6 @@ def generate_csv(location, filename, delimiter, quotechar, quoting, dialect, con
     csv_writer = csv.writer(output, delimiter=delimiter, quotechar=quotechar, quoting=quoting, dialect=dialect)
     csv_writer.writerows(content)
     csv_content = output.getvalue()
-
     write_to_gcs(location, filename, csv_content)
     
 def init_generate_csv(location, filename, rows, data_types):
@@ -40,10 +37,9 @@ def init_generate_csv(location, filename, rows, data_types):
             try:
                 generated_value = method()
             except Exception as e:
-                print('TRIED TO CALL %s' % data_type['method'])
+                logging.error('Attempted to call: %s' % data_type['method'])
                 generated_value = None
-                print('generated_value is now %s' % generated_value)
-                print(e)
+                logging.exception(e)
 
             if generated_value is not None:
                 row.append(generated_value)
@@ -53,7 +49,6 @@ def init_generate_csv(location, filename, rows, data_types):
         content.append(row)
 
     content.insert(0, header)
-
     generate_csv(location, filename, ',', '"', csv.QUOTE_MINIMAL, 'unix', content)
 
     return content
