@@ -54,15 +54,14 @@ def init_generate_csv(location, filename, rows, data_types, delimiter):
     return content
 
 def delimiter_map(delimiter):
-    match delimiter:
-        case 'comma':
-            return ','
-        case 'semicolon':
-            return ';'
-        case 'pipe':
-            return '|'
-        case _:
-            return ','
+    if delimiter == 'comma':
+        return ','
+    elif delimiter == 'semicolon':
+        return ';'
+    elif delimiter == 'pipe':
+        return '|'
+
+    return ','
 
 def get_available_faker_types():
     types_and_labels = []
