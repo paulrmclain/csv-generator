@@ -20,6 +20,10 @@ config = dotenv_values("config.env")
 def index_page():
     return render_template('index.html')
 
+@app.route("/about")
+def about_page():
+    return render_template('about.html')
+
 @app.route('/test/generate/csv/<filename>/<rows>')
 def test_generate_handler(filename, rows):
     args = request.args.items()
