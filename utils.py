@@ -86,7 +86,12 @@ def check_method(method):
         'pystr_format',
         'pystruct',
         'pytuple',
-        'parse']
+        'parse',
+        'random',
+        'seed_instance',
+        'seed_locale',
+        'weights',
+        'cache_pattern']
 
     for ul in undesired_list:
         if ul == method:
