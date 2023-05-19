@@ -21,7 +21,7 @@ $(function() {
         header_count++;
 
         var new_div = $('<div class="input-group mb-3" id="new_div_' + header_count + '"></div>');        
-        var input_elem = $('<input type="text" id="name_' + header_count + '" class="form-control" placeholder="Header Name">');
+        var input_elem = $('<input type="text" id="name_' + header_count + '" class="form-control" placeholder="Column Title">');
         var select_elem = $('<select class="form-select" id="type_' + header_count + '""></select>');
         var delete_btn_elem = $('<button class="btn btn-danger" type="button" id="delete_' + header_count + '"><i class="bi bi-trash3"></i></button>');
 
@@ -84,16 +84,16 @@ $(function() {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
         }).done(function(response) {
-            var formatted_str = '';
+            /*var formatted_str = '';
             
             for ( var i = 0; i < response.length; i++ ) {
                 for ( var j = 0; j < response[i].length; j++ ) {
                     formatted_str += response[i][j] + ','
                 }
                 formatted_str += '\r\n';
-            }
+            }*/
 
-            $('#json_resp').text(formatted_str);
+            // $('#json_resp').text(formatted_str);
             $('#status_msg').attr('class', 'alert alert-success');
             $('#status_msg').html('Success! Your file is ready to be downloaded <a href="/download/' + csv_file_name + '">here</a>. Files will expire after 24 hours.');
         });
