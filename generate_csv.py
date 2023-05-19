@@ -8,6 +8,8 @@ from google.cloud import storage
 from faker import Faker
 fake = Faker()
 
+import logging
+
 def write_to_gcs(location, filename, csv_content):
     storage_client = storage.Client()
     bucket = storage_client.bucket(location)
